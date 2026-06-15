@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardGuides"
+    style="@style/HomeCardStyle">
+    <ImageView style="@style/HomeCardIconStyle" android:src="@drawable/ic_guide" />
+    <TextView style="@style/HomeCardTitleStyle" android:text="Book a Guide" />
+    <TextView style="@style/HomeCardBodyStyle" android:text="Find trusted local guides and reserve by date and hour." />
+</LinearLayout>

@@ -1,0 +1,71 @@
+package com.example.cityguide.adapters;
+
+import android.content.res.ColorStateList;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.cityguide.R;
+import com.example.cityguide.models.Place;
+
+import java.util.List;
+
+public class PlaceAdapter extends BaseAdapter {
+
+    public interface OnPlaceActionListener {
+        void onDetails(Place place);
+        void onMap(Place place);
+    }
+
+    private final List<Place> places;
+    private final OnPlaceActionListener listener;
+
+    public PlaceAdapter(List<Place> places, OnPlaceActionListener listener) {
+        this.places = places;
+        this.listener = listener;
+    }
+
+    @Override
+    public int getCount() {
+        return places.size();
+    }
+
+    @Override
+    public Place getItem(int position) {
+        return places.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return places.get(position).getId();
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view = convertView;
+        if (view == null) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_place, parent, false);
+        }
+
+        Place place = getItem(position);
+        ((TextView) view.findViewById(R.id.textInitial)).setText(place.getName().substring(0, 1));
+        ((TextView) view.findViewById(R.id.textItemTitle)).setText(place.getName());
+        ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(place.getCity() + " · " + place.getCategory());
+        ((TextView) view.findViewById(R.id.textItemDescription)).setText(place.getDescription());
+        ((TextView) view.findViewById(R.id.textItemMeta)).setText("Rating " + place.getRating());
+
+        Button detailsButton = view.findViewById(R.id.buttonPrimary);
+        Button mapButton = view.findViewById(R.id.buttonSecondary);
+        detailsButton.setBackgroundTintList((ColorStateList) null);
+        mapButton.setBackgroundTintList((ColorStateList) null);
+        detailsButton.setText("View Details");
+        mapButton.setText("View Map");
+        detailsButton.setOnClickListener(v -> listener.onDetails(place));
+        mapButton.setOnClickListener(v -> listener.onMap(place));
+        view.setOnClickListener(v -> listener.onDetails(place));
+        return view;
+    }
+}

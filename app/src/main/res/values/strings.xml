@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CityGuide+</string>
+    <string name="splash_subtitle">Discover the beauty of Morocco</string>
+    <string name="welcome_title">Welcome to CityGuide+</string>
+    <string name="welcome_subtitle">Discover Morocco with local guides, beautiful places and authentic experiences.</string>
+    <string name="get_started">Get Started</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="google_maps_key">YOUR_GOOGLE_MAPS_API_KEY_HERE</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardFavorites"
+    style="@style/HomeCardStyle">
+    <ImageView style="@style/HomeCardIconStyle" android:src="@drawable/ic_favorite" />
+    <TextView style="@style/HomeCardTitleStyle" android:text="Favorites" />
+    <TextView style="@style/HomeCardBodyStyle" android:text="Your saved places, guides and experiences." />
+</LinearLayout>

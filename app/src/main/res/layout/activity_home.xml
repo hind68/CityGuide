@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="18dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/actionSettings"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:src="@drawable/ic_settings" />
+
+                <TextView
+                    android:id="@+id/textGreeting"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/deep_navy_blue"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/onboarding_icon_frame"
+                    android:padding="7dp"
+                    android:src="@drawable/logo" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/actionSearch"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/input_background"
+                android:drawableLeft="@drawable/ic_map"
+                android:drawablePadding="12dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
+                android:text="Search places in Morocco..."
+                android:textColor="@color/olive_shadow"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:text="Explore by Category"
+                android:textColor="@color/deep_navy_blue"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/categoryRestaurants"
+                    style="@style/HomeCategoryStyle">
+                    <ImageView style="@style/HomeCategoryIconStyle" android:src="@drawable/ic_restaurant" />
+                    <TextView style="@style/HomeCategoryTextStyle" android:text="Restaurants" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/categoryCafes"
+                    style="@style/HomeCategoryStyle">
+                    <ImageView style="@style/HomeCategoryIconStyle" android:src="@drawable/ic_cafe" />
+                    <TextView style="@style/HomeCategoryTextStyle" android:text="Cafes" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/categoryMonuments"
+                    style="@style/HomeCategoryStyle">
+                    <ImageView style="@style/HomeCategoryIconStyle" android:src="@drawable/ic_monument" />
+                    <TextView style="@style/HomeCategoryTextStyle" android:text="Monuments" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/categoryLeisure"
+                    style="@style/HomeCategoryStyle">
+                    <ImageView style="@style/HomeCategoryIconStyle" android:src="@drawable/ic_leisure" />
+                    <TextView style="@style/HomeCategoryTextStyle" android:text="Activities" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="Curated Experiences"
+                android:textColor="@color/deep_navy_blue"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="14dp"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:id="@+id/collectionRooftops"
+                        style="@style/HomeWideImageCardStyle">
+                        <ImageView style="@style/HomeCardImageStyle" android:src="@drawable/welcome_koutoubia" />
+                        <View style="@style/HomeDarkOverlayStyle" />
+                        <TextView style="@style/HomeImageTitleStyle" android:text="Marrakech Rooftops" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/collectionHiddenMedina"
+                        style="@style/HomeWideImageCardStyle">
+                        <ImageView style="@style/HomeCardImageStyle" android:src="@drawable/welcome_chef" />
+                        <View style="@style/HomeDarkOverlayStyle" />
+                        <TextView style="@style/HomeImageTitleStyle" android:text="Hidden Medina Treasures" />
+                    </FrameLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="Trending Now"
+                android:textColor="@color/deep_navy_blue"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/trendingPlace"
+                    style="@style/HomeSmallPlaceCardStyle"
+                    android:layout_marginRight="8dp">
+                    <ImageView style="@style/HomeSmallImageStyle" android:src="@drawable/welcome_hassan" />
+                    <TextView style="@style/HomeSmallTitleStyle" android:text="Oudayas Kasbah" />
+                    <TextView style="@style/HomeSmallSubtitleStyle" android:text="Rabat" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/trendingCafe"
+                    style="@style/HomeSmallPlaceCardStyle"
+                    android:layout_marginLeft="8dp">
+                    <ImageView style="@style/HomeSmallImageStyle" android:src="@drawable/welcome_koutoubia" />
+                    <TextView style="@style/HomeSmallTitleStyle" android:text="Cafe Clock" />
+                    <TextView style="@style/HomeSmallSubtitleStyle" android:text="Fes" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="Available Local Guides"
+                android:textColor="@color/deep_navy_blue"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/guideAmina"
+                    style="@style/HomeGuideCardStyle"
+                    android:layout_marginRight="8dp">
+                    <TextView style="@style/HomeAvatarStyle" android:text="A" />
+                    <TextView style="@style/HomeSmallTitleStyle" android:text="Amina E." />
+                    <TextView style="@style/HomeSmallSubtitleStyle" android:text="Medina heritage" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/guideOmar"
+                    style="@style/HomeGuideCardStyle"
+                    android:layout_marginLeft="8dp">
+                    <TextView style="@style/HomeAvatarStyle" android:text="O" />
+                    <TextView style="@style/HomeSmallTitleStyle" android:text="Omar C." />
+                    <TextView style="@style/HomeSmallSubtitleStyle" android:text="Urban culture" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="Recently Viewed"
+                android:textColor="@color/deep_navy_blue"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/recentPlace"
+                android:layout_width="match_parent"
+                android:layout_height="86dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/home_card"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+                <ImageView
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:background="@drawable/home_image_round"
+                    android:clipToOutline="true"
+                    android:elevation="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/welcome_chef" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Blue Streets"
+                        android:textColor="@color/deep_navy_blue"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Chefchaouen"
+                        android:textColor="@color/olive_shadow"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonExploreMap"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/btn_primary"
+                android:text="Explore the Map"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="deep_navy_blue">#0B2E63</color>
+    <color name="gold">#C6A15B</color>
+    <color name="cream">#FAFAF7</color>
+    <color name="desert_sand">#E9D8BD</color>
+    <color name="soft_terracotta">#B86B4B</color>
+    <color name="olive_shadow">#6F7D5E</color>
+    <color name="transparent_cream_overlay">#EEFFFFFF</color>
+    <color name="transparent_white_card">#EFFFFFFF</color>
+    <color name="soft_gold">#22C6A15B</color>
+    <color name="soft_outline">#1A0B2E63</color>
+    <color name="splash_soft_overlay">#80FFF8EF</color>
+    <color name="splash_subtitle_gray">#6F7F91</color>
+    <color name="transparent_dark_overlay">#66000000</color>
+</resources>

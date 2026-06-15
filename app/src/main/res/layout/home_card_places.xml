@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardPlaces"
+    style="@style/HomeCardStyle">
+    <ImageView style="@style/HomeCardIconStyle" android:src="@drawable/ic_place" />
+    <TextView style="@style/HomeCardTitleStyle" android:text="Explore Places" />
+    <TextView style="@style/HomeCardBodyStyle" android:text="Discover monuments, gardens, souks, museums and hidden gems." />
+</LinearLayout>

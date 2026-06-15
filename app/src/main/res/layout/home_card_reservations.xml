@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardReservations"
+    style="@style/HomeCardStyle">
+    <ImageView style="@style/HomeCardIconStyle" android:src="@drawable/ic_reservation" />
+    <TextView style="@style/HomeCardTitleStyle" android:text="My Reservations" />
+    <TextView style="@style/HomeCardBodyStyle" android:text="Track your booked guides and experiences." />
+</LinearLayout>

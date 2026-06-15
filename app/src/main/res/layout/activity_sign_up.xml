@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/welcome_hassan" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#33000000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="720dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/welcome_bottom_fade" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="28dp"
+            android:paddingTop="72dp"
+            android:paddingRight="28dp"
+            android:paddingBottom="34dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create your account"
+                android:textColor="@color/white"
+                android:shadowColor="#66000000"
+                android:shadowDx="0"
+                android:shadowDy="1"
+                android:shadowRadius="5"
+                android:textSize="34sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Save favorites, reservations and your Moroccan travel preferences."
+                android:textColor="@color/white"
+                android:shadowColor="#66000000"
+                android:shadowDx="0"
+                android:shadowDy="1"
+                android:shadowRadius="4"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editFullName"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="26dp"
+                android:background="@drawable/input_background"
+                android:hint="Full name"
+                android:inputType="textPersonName"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
+                android:textColor="@color/deep_navy_blue"
+                android:textColorHint="@color/olive_shadow" />
+
+            <EditText
+                android:id="@+id/editEmail"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/input_background"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
+                android:textColor="@color/deep_navy_blue"
+                android:textColorHint="@color/olive_shadow" />
+
+            <EditText
+                android:id="@+id/editPhone"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/input_background"
+                android:hint="Phone"
+                android:inputType="phone"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
+                android:textColor="@color/deep_navy_blue"
+                android:textColorHint="@color/olive_shadow" />
+
+            <EditText
+                android:id="@+id/editPassword"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/input_background"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
+                android:textColor="@color/deep_navy_blue"
+                android:textColorHint="@color/olive_shadow" />
+
+            <EditText
+                android:id="@+id/editConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/input_background"
+                android:hint="Confirm password"
+                android:inputType="textPassword"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
+                android:textColor="@color/deep_navy_blue"
+                android:textColorHint="@color/olive_shadow" />
+
+            <Button
+                android:id="@+id/buttonCreateAccount"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/btn_primary"
+                android:text="Create Account"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Already have an account? Sign In"
+                android:textColor="@color/white"
+                android:shadowColor="#66000000"
+                android:shadowDx="0"
+                android:shadowDy="1"
+                android:shadowRadius="4"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

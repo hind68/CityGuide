@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.CityGuide" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@color/deep_navy_blue</item>
+        <item name="android:navigationBarColor">@color/deep_navy_blue</item>
+        <item name="android:buttonStyle">@style/Widget.CityGuide.Button</item>
+        <item name="colorPrimary">@color/deep_navy_blue</item>
+        <item name="colorSecondary">@color/gold</item>
+    </style>
+
+    <style name="Theme.CityGuide" parent="Base.Theme.CityGuide" />
+</resources>

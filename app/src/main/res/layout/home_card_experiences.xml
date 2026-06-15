@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardExperiences"
+    style="@style/HomeCardStyle">
+    <ImageView style="@style/HomeCardIconStyle" android:src="@drawable/ic_experience" />
+    <TextView style="@style/HomeCardTitleStyle" android:text="Moroccan Experiences" />
+    <TextView style="@style/HomeCardBodyStyle" android:text="Food tours, medina walks, souk shopping and cultural moments." />
+</LinearLayout>
