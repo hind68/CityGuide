@@ -83,6 +83,6 @@
             android:background="@drawable/btn_secondary"
             android:text="Add to Favorites"
             android:textAllCaps="false"
-            android:textColor="@color/deep_navy_blue" />
+            android:textColor="@color/white" />
     </LinearLayout>
 </ScrollView>

@@ -85,7 +85,7 @@
             android:background="@drawable/btn_secondary"
             android:text="Edit Profile"
             android:textAllCaps="false"
-            android:textColor="@color/deep_navy_blue" />
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="match_parent"
@@ -107,16 +107,6 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/buttonFavorites"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/btn_secondary"
-            android:text="Favorites"
-            android:textAllCaps="false"
-            android:textColor="@color/deep_navy_blue" />
-
-        <Button
             android:id="@+id/buttonRecentlyViewed"
             android:layout_width="match_parent"
             android:layout_height="54dp"
@@ -124,7 +114,37 @@
             android:background="@drawable/btn_secondary"
             android:text="Recently Viewed"
             android:textAllCaps="false"
-            android:textColor="@color/deep_navy_blue" />
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/buttonSavedItineraries"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_secondary"
+            android:text="Saved Itineraries"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/buttonTourismOffices"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_secondary"
+            android:text="Tourism Offices"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/buttonLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_secondary"
+            android:text="Language"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/buttonLogout"

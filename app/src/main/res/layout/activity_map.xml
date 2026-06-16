@@ -47,5 +47,16 @@
             android:text="Open External Map"
             android:textAllCaps="false"
             android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/buttonSaveVisitedPlace"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/btn_secondary"
+            android:text="Save This Visit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:visibility="gone" />
     </LinearLayout>
 </FrameLayout>

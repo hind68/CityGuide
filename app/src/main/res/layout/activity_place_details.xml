@@ -79,6 +79,29 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/imageUserPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="22dp"
+            android:background="@drawable/home_card"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/buttonTakePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="22dp"
+            android:background="@drawable/btn_secondary"
+            android:text="Add Your Photo"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
         <Button
             android:id="@+id/buttonOpenMap"
             android:layout_width="match_parent"
@@ -101,7 +124,19 @@
             android:background="@drawable/btn_secondary"
             android:text="View on Map Screen"
             android:textAllCaps="false"
-            android:textColor="@color/deep_navy_blue" />
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/buttonSaveItinerary"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="22dp"
+            android:background="@drawable/btn_secondary"
+            android:text="Save Itinerary"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/buttonCall"
@@ -113,7 +148,7 @@
             android:background="@drawable/btn_secondary"
             android:text="Call"
             android:textAllCaps="false"
-            android:textColor="@color/deep_navy_blue" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/buttonFavorite"
@@ -125,6 +160,6 @@
             android:background="@drawable/btn_secondary"
             android:text="Add to Favorites"
             android:textAllCaps="false"
-            android:textColor="@color/deep_navy_blue" />
+            android:textColor="@color/white" />
     </LinearLayout>
 </ScrollView>

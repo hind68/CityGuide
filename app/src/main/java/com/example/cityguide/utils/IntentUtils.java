@@ -31,6 +31,12 @@ public final class IntentUtils {
         context.startActivity(intent);
     }
 
+    public static void sendSms(Context context, String phone, String message) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phone));
+        intent.putExtra("sms_body", message);
+        context.startActivity(intent);
+    }
+
     public static void shareText(Context context, String text) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");

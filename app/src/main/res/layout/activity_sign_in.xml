@@ -106,7 +106,7 @@
                 android:background="@drawable/btn_secondary"
                 android:text="Continue as Guest"
                 android:textAllCaps="false"
-                android:textColor="@color/deep_navy_blue"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <TextView

@@ -12,6 +12,7 @@ import com.example.cityguide.models.Guide;
 import com.example.cityguide.models.Place;
 import com.example.cityguide.models.RecentView;
 import com.example.cityguide.models.Reservation;
+import com.example.cityguide.models.SavedItinerary;
 import com.example.cityguide.models.User;
 import com.example.cityguide.utils.Constants;
 
@@ -102,6 +103,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "itemType TEXT," +
                 "viewedAt INTEGER)");
 
+        db.execSQL("CREATE TABLE saved_itineraries (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "userId INTEGER," +
+                "placeId INTEGER," +
+                "createdAt INTEGER)");
+
+        db.execSQL("CREATE TABLE user_place_photos (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "userId INTEGER," +
+                "placeId INTEGER," +
+                "imagePath TEXT," +
+                "createdAt INTEGER)");
+
         db.execSQL("CREATE TABLE reservations (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "userId INTEGER," +
@@ -120,6 +134,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS reservations");
+        db.execSQL("DROP TABLE IF EXISTS user_place_photos");
+        db.execSQL("DROP TABLE IF EXISTS saved_itineraries");
         db.execSQL("DROP TABLE IF EXISTS recent_views");
         db.execSQL("DROP TABLE IF EXISTS favorites");
         db.execSQL("DROP TABLE IF EXISTS experiences");
@@ -442,6 +458,74 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return reservations;
     }
 
+    public void addSavedItinerary(int userId, int placeId) {
+        if (isSavedItinerary(userId, placeId)) {
+            return;
+        }
+        ContentValues values = new ContentValues();
+        values.put("userId", userId);
+        values.put("placeId", placeId);
+        values.put("createdAt", System.currentTimeMillis());
+        getWritableDatabase().insert("saved_itineraries", null, values);
+    }
+
+    public boolean isSavedItinerary(int userId, int placeId) {
+        Cursor cursor = getReadableDatabase().rawQuery(
+                "SELECT id FROM saved_itineraries WHERE userId = ? AND placeId = ?",
+                new String[]{String.valueOf(userId), String.valueOf(placeId)}
+        );
+        boolean exists = cursor.moveToFirst();
+        cursor.close();
+        return exists;
+    }
+
+    public List<SavedItinerary> getSavedItineraries(int userId) {
+        List<SavedItinerary> itineraries = new ArrayList<>();
+        Cursor cursor = getReadableDatabase().rawQuery(
+                "SELECT * FROM saved_itineraries WHERE userId = ? ORDER BY createdAt DESC",
+                new String[]{String.valueOf(userId)}
+        );
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            int placeId = cursor.getInt(cursor.getColumnIndexOrThrow("placeId"));
+            Place place = getPlaceById(placeId);
+            if (place != null) {
+                itineraries.add(new SavedItinerary(id, userId, placeId, place.getName(),
+                        place.getCity() + " - " + place.getCategory(),
+                        place.getImage(), place.getLatitude(), place.getLongitude()));
+            }
+        }
+        cursor.close();
+        return itineraries;
+    }
+
+    public void removeSavedItinerary(int itineraryId, int userId) {
+        getWritableDatabase().delete("saved_itineraries", "id = ? AND userId = ?",
+                new String[]{String.valueOf(itineraryId), String.valueOf(userId)});
+    }
+
+    public void addUserPlacePhoto(int userId, int placeId, String imagePath) {
+        ContentValues values = new ContentValues();
+        values.put("userId", userId);
+        values.put("placeId", placeId);
+        values.put("imagePath", imagePath);
+        values.put("createdAt", System.currentTimeMillis());
+        getWritableDatabase().insert("user_place_photos", null, values);
+    }
+
+    public String getLatestUserPlacePhoto(int userId, int placeId) {
+        Cursor cursor = getReadableDatabase().rawQuery(
+                "SELECT imagePath FROM user_place_photos WHERE userId = ? AND placeId = ? ORDER BY createdAt DESC LIMIT 1",
+                new String[]{String.valueOf(userId), String.valueOf(placeId)}
+        );
+        String imagePath = null;
+        if (cursor.moveToFirst()) {
+            imagePath = cursor.getString(cursor.getColumnIndexOrThrow("imagePath"));
+        }
+        cursor.close();
+        return imagePath;
+    }
+
     public boolean cancelReservation(int reservationId, int userId) {
         ContentValues values = new ContentValues();
         values.put("status", "Cancelled");
@@ -663,6 +747,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "itemId INTEGER," +
                 "itemType TEXT," +
                 "viewedAt INTEGER)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS saved_itineraries (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "userId INTEGER," +
+                "placeId INTEGER," +
+                "createdAt INTEGER)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS user_place_photos (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "userId INTEGER," +
+                "placeId INTEGER," +
+                "imagePath TEXT," +
+                "createdAt INTEGER)");
         db.execSQL("CREATE TABLE IF NOT EXISTS reservations (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "userId INTEGER," +

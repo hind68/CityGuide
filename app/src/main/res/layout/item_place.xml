@@ -87,7 +87,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/btn_secondary"
                     android:textAllCaps="false"
-                    android:textColor="@color/deep_navy_blue" />
+                    android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -39,10 +39,13 @@ public class SettingsActivity extends BaseActivity {
         findViewById(R.id.buttonEditProfile).setOnClickListener(v -> showEditProfileDialog());
         findViewById(R.id.buttonMyReservations).setOnClickListener(v ->
                 startActivity(new Intent(this, MyReservationsActivity.class)));
-        findViewById(R.id.buttonFavorites).setOnClickListener(v ->
-                startActivity(new Intent(this, FavoritesActivity.class)));
         findViewById(R.id.buttonRecentlyViewed).setOnClickListener(v ->
                 startActivity(new Intent(this, RecentViewsActivity.class)));
+        findViewById(R.id.buttonSavedItineraries).setOnClickListener(v ->
+                startActivity(new Intent(this, SavedItinerariesActivity.class)));
+        findViewById(R.id.buttonTourismOffices).setOnClickListener(v ->
+                startActivity(new Intent(this, TourismOfficesActivity.class)));
+        findViewById(R.id.buttonLanguage).setOnClickListener(v -> showLanguageDialog());
 
         findViewById(R.id.buttonLogout).setOnClickListener(v -> {
             sessionManager.logout();
@@ -133,6 +136,26 @@ public class SettingsActivity extends BaseActivity {
                     } else {
                         Toast.makeText(this, "Could not update profile.", Toast.LENGTH_SHORT).show();
                     }
+                })
+                .show();
+    }
+
+    private void showLanguageDialog() {
+        String[] languages = {"English", "French", "Arabic", "Spanish"};
+        int checked = 0;
+        String current = sessionManager.getDefaultLanguage();
+        for (int i = 0; i < languages.length; i++) {
+            if (languages[i].equals(current)) {
+                checked = i;
+                break;
+            }
+        }
+        new AlertDialog.Builder(this)
+                .setTitle("Language")
+                .setSingleChoiceItems(languages, checked, (dialog, which) -> {
+                    sessionManager.saveDefaultLanguage(languages[which]);
+                    Toast.makeText(this, "Language saved: " + languages[which], Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                 })
                 .show();
     }
