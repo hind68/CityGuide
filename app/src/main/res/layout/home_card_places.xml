@@ -3,6 +3,6 @@
     android:id="@+id/cardPlaces"
     style="@style/HomeCardStyle">
     <ImageView style="@style/HomeCardIconStyle" android:src="@drawable/ic_place" />
-    <TextView style="@style/HomeCardTitleStyle" android:text="Explore Places" />
-    <TextView style="@style/HomeCardBodyStyle" android:text="Discover monuments, gardens, souks, museums and hidden gems." />
+    <TextView style="@style/HomeCardTitleStyle" android:text="@string/explore_places" />
+    <TextView style="@style/HomeCardBodyStyle" android:text="@string/places_card_body" />
 </LinearLayout>

@@ -78,6 +78,24 @@ public class SessionManager {
         return preferences.getString(KEY_DEFAULT_LANGUAGE, "English");
     }
 
+    public void saveLanguageCode(String languageCode) {
+        preferences.edit().putString(KEY_DEFAULT_LANGUAGE, languageCode).apply();
+    }
+
+    public String getLanguageCode() {
+        String value = preferences.getString(KEY_DEFAULT_LANGUAGE, "en");
+        if ("French".equalsIgnoreCase(value)) {
+            return "fr";
+        }
+        if ("English".equalsIgnoreCase(value)) {
+            return "en";
+        }
+        if ("fr".equalsIgnoreCase(value)) {
+            return "fr";
+        }
+        return "en";
+    }
+
     public void setFirstLaunch(boolean firstLaunch) {
         preferences.edit().putBoolean(KEY_FIRST_LAUNCH, firstLaunch).apply();
     }

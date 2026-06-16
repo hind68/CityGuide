@@ -75,16 +75,16 @@ public class WelcomeActivity extends BaseActivity {
         List<OnboardingItem> items = new ArrayList<>();
         items.add(new OnboardingItem(
                 R.drawable.welcome_hassan,
-                "Iconic Morocco",
-                "Discover grand monuments, timeless architecture and unforgettable city landmarks."));
+                getString(R.string.onboarding_iconic_title),
+                getString(R.string.onboarding_iconic_body)));
         items.add(new OnboardingItem(
                 R.drawable.welcome_koutoubia,
-                "Explore Around You",
-                "Find nearby places on the map, plan beautiful stops and move through each city with confidence."));
+                getString(R.string.onboarding_map_title),
+                getString(R.string.onboarding_map_body)));
         items.add(new OnboardingItem(
                 R.drawable.welcome_chef,
-                "Guides & Hidden Gems",
-                "Meet local guides, save favorite places and discover experiences you would not find alone."));
+                getString(R.string.onboarding_guides_title),
+                getString(R.string.onboarding_guides_body)));
         return items;
     }
 
@@ -122,7 +122,7 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     private void updateButtonText(int position) {
-        buttonNext.setText(position == onboardingItems.size() - 1 ? "Get Started" : "Next");
+        buttonNext.setText(position == onboardingItems.size() - 1 ? R.string.get_started : R.string.next);
     }
 
     private int dpToPx(int dp) {

@@ -35,7 +35,7 @@ public class RecentViewsActivity extends BaseActivity {
         if (recentViews.isEmpty()) {
             listRecentViews.setVisibility(View.GONE);
             emptyState.setVisibility(View.VISIBLE);
-            emptyText.setText("Places, guides and experiences you open will appear here.");
+            emptyText.setText(R.string.recent_views_empty);
             return;
         }
 
@@ -56,7 +56,7 @@ public class RecentViewsActivity extends BaseActivity {
             intent = new Intent(this, ExperienceDetailsActivity.class);
             intent.putExtra(Constants.EXTRA_EXPERIENCE_ID, recentView.getItemId());
         } else {
-            Toast.makeText(this, "Details are not available yet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.favorite_details_unavailable, Toast.LENGTH_SHORT).show();
             return;
         }
         startActivity(intent);

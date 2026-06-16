@@ -1,6 +1,7 @@
 package com.example.cityguide.activities;
 
 import android.content.Intent;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cityguide.R;
+import com.example.cityguide.utils.LocaleHelper;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -28,6 +30,11 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.wrap(newBase));
     }
 
     @Override
@@ -97,11 +104,11 @@ public class BaseActivity extends AppCompatActivity {
         nav.setElevation(dp(10));
         nav.setPadding(dp(2), dp(5), dp(2), dp(6));
 
-        nav.addView(createNavItem("Home", R.drawable.ic_home, HomeActivity.class, this instanceof HomeActivity));
-        nav.addView(createNavItem("Maps", R.drawable.ic_map, MapActivity.class, this instanceof MapActivity));
-        nav.addView(createNavItem("Guides", R.drawable.ic_guide, GuidesActivity.class, this instanceof GuidesActivity));
-        nav.addView(createNavItem("Favorites", R.drawable.ic_favorite, FavoritesActivity.class, this instanceof FavoritesActivity));
-        nav.addView(createNavItem("Profile", R.drawable.ic_settings, SettingsActivity.class, this instanceof SettingsActivity));
+        nav.addView(createNavItem(getString(R.string.nav_home), R.drawable.ic_home, HomeActivity.class, this instanceof HomeActivity));
+        nav.addView(createNavItem(getString(R.string.nav_maps), R.drawable.ic_map, MapActivity.class, this instanceof MapActivity));
+        nav.addView(createNavItem(getString(R.string.nav_guides), R.drawable.ic_guide, GuidesActivity.class, this instanceof GuidesActivity));
+        nav.addView(createNavItem(getString(R.string.nav_favorites), R.drawable.ic_favorite, FavoritesActivity.class, this instanceof FavoritesActivity));
+        nav.addView(createNavItem(getString(R.string.nav_profile), R.drawable.ic_settings, SettingsActivity.class, this instanceof SettingsActivity));
 
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -178,10 +185,10 @@ public class BaseActivity extends AppCompatActivity {
 
     private void showExitConfirmation() {
         new AlertDialog.Builder(this)
-                .setTitle("Exit CityGuide+?")
-                .setMessage("Are you sure you want to close the app?")
-                .setNegativeButton("Stay", null)
-                .setPositiveButton("Exit", (dialog, which) -> finishAffinity())
+                .setTitle(R.string.exit_title)
+                .setMessage(R.string.exit_message)
+                .setNegativeButton(R.string.stay, null)
+                .setPositiveButton(R.string.exit, (dialog, which) -> finishAffinity())
                 .show();
     }
 

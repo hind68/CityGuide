@@ -56,11 +56,15 @@ public class ExperienceAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.textItemTitle)).setText(experience.getTitle());
         ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(experience.getCity() + " - " + experience.getCategory());
         ((TextView) view.findViewById(R.id.textItemDescription)).setText(experience.getDescription());
-        ((TextView) view.findViewById(R.id.textItemMeta)).setText(experience.getDuration() + " - " + experience.getPrice() + " MAD - Rating " + experience.getRating());
+        ((TextView) view.findViewById(R.id.textItemMeta)).setText(parent.getContext().getString(
+                R.string.duration_price_rating_label,
+                experience.getDuration(),
+                String.valueOf(experience.getPrice()),
+                String.valueOf(experience.getRating())));
 
         Button detailsButton = view.findViewById(R.id.buttonPrimary);
         detailsButton.setBackgroundTintList((ColorStateList) null);
-        detailsButton.setText("View Details");
+        detailsButton.setText(R.string.view_details);
         detailsButton.setOnClickListener(v -> listener.onDetails(experience));
         view.setOnClickListener(v -> listener.onDetails(experience));
         return view;

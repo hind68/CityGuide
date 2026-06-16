@@ -31,7 +31,7 @@
             android:layout_gravity="top|end"
             android:layout_margin="12dp"
             android:background="@drawable/btn_primary"
-            android:text="Remove"
+            android:text="@string/remove"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -80,7 +80,7 @@
                 android:layout_height="44dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btn_primary"
-                android:text="Open Route"
+                android:text="@string/open_route"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
         </LinearLayout>

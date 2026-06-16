@@ -3,6 +3,6 @@
     android:id="@+id/cardGuides"
     style="@style/HomeCardStyle">
     <ImageView style="@style/HomeCardIconStyle" android:src="@drawable/ic_guide" />
-    <TextView style="@style/HomeCardTitleStyle" android:text="Book a Guide" />
-    <TextView style="@style/HomeCardBodyStyle" android:text="Find trusted local guides and reserve by date and hour." />
+    <TextView style="@style/HomeCardTitleStyle" android:text="@string/book_a_guide" />
+    <TextView style="@style/HomeCardBodyStyle" android:text="@string/guides_card_body" />
 </LinearLayout>

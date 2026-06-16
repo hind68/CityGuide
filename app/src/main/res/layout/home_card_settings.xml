@@ -3,6 +3,6 @@
     android:id="@+id/cardSettings"
     style="@style/HomeCardStyle">
     <ImageView style="@style/HomeCardIconStyle" android:src="@drawable/ic_settings" />
-    <TextView style="@style/HomeCardTitleStyle" android:text="Settings" />
-    <TextView style="@style/HomeCardBodyStyle" android:text="Personalize your app preferences." />
+    <TextView style="@style/HomeCardTitleStyle" android:text="@string/settings" />
+    <TextView style="@style/HomeCardBodyStyle" android:text="@string/settings_card_body" />
 </LinearLayout>

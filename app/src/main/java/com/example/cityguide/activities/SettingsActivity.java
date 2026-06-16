@@ -74,15 +74,15 @@ public class SettingsActivity extends BaseActivity {
         if (signedIn && user != null) {
             profileName.setText(user.getFullName());
             profileEmail.setText(user.getEmail());
-            profileStatus.setText("SIGNED IN");
+            profileStatus.setText(R.string.signed_in);
         } else if (sessionManager.isGuest()) {
-            profileName.setText("Guest traveler");
-            profileEmail.setText("Sign in to save favorites and reservations");
-            profileStatus.setText("GUEST MODE");
+            profileName.setText(R.string.guest_traveler);
+            profileEmail.setText(R.string.profile_guest_email);
+            profileStatus.setText(R.string.guest_mode);
         } else {
-            profileName.setText("Traveler");
-            profileEmail.setText("Sign in to personalize your journey");
-            profileStatus.setText("NOT SIGNED IN");
+            profileName.setText(R.string.traveler);
+            profileEmail.setText(R.string.profile_default_email);
+            profileStatus.setText(R.string.not_signed_in);
         }
 
         findViewById(R.id.buttonEditProfile).setVisibility(signedIn ? View.VISIBLE : View.GONE);
@@ -92,13 +92,13 @@ public class SettingsActivity extends BaseActivity {
 
     private void showEditProfileDialog() {
         if (!sessionManager.isLoggedIn() || sessionManager.isGuest()) {
-            Toast.makeText(this, "Sign in to edit your profile.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.signin_to_edit_profile, Toast.LENGTH_SHORT).show();
             return;
         }
 
         User user = databaseHelper.getUserById(sessionManager.getUserId());
         if (user == null) {
-            Toast.makeText(this, "Profile not found.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.profile_not_found, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -107,55 +107,50 @@ public class SettingsActivity extends BaseActivity {
         form.setPadding(32, 12, 32, 0);
 
         EditText nameInput = new EditText(this);
-        nameInput.setHint("Full name");
+        nameInput.setHint(R.string.full_name);
         nameInput.setSingleLine(true);
         nameInput.setText(user.getFullName());
         form.addView(nameInput);
 
         EditText phoneInput = new EditText(this);
-        phoneInput.setHint("Phone");
+        phoneInput.setHint(R.string.phone);
         phoneInput.setSingleLine(true);
         phoneInput.setText(user.getPhone());
         form.addView(phoneInput);
 
         new AlertDialog.Builder(this)
-                .setTitle("Edit Profile")
+                .setTitle(R.string.edit_profile)
                 .setView(form)
-                .setNegativeButton("Cancel", null)
-                .setPositiveButton("Save", (dialog, which) -> {
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     String name = nameInput.getText().toString().trim();
                     String phone = phoneInput.getText().toString().trim();
                     if (name.isEmpty()) {
-                        Toast.makeText(this, "Name cannot be empty.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.name_cannot_be_empty, Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (databaseHelper.updateUserProfile(user.getId(), name, phone)) {
                         sessionManager.saveUserName(name);
                         bindProfile();
-                        Toast.makeText(this, "Profile updated.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.profile_updated, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(this, "Could not update profile.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.profile_update_error, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .show();
     }
 
     private void showLanguageDialog() {
-        String[] languages = {"English", "French", "Arabic", "Spanish"};
-        int checked = 0;
-        String current = sessionManager.getDefaultLanguage();
-        for (int i = 0; i < languages.length; i++) {
-            if (languages[i].equals(current)) {
-                checked = i;
-                break;
-            }
-        }
+        String[] languageLabels = {getString(R.string.english), getString(R.string.french)};
+        String[] languageCodes = {"en", "fr"};
+        int checked = "fr".equals(sessionManager.getLanguageCode()) ? 1 : 0;
         new AlertDialog.Builder(this)
-                .setTitle("Language")
-                .setSingleChoiceItems(languages, checked, (dialog, which) -> {
-                    sessionManager.saveDefaultLanguage(languages[which]);
-                    Toast.makeText(this, "Language saved: " + languages[which], Toast.LENGTH_SHORT).show();
+                .setTitle(R.string.language)
+                .setSingleChoiceItems(languageLabels, checked, (dialog, which) -> {
+                    sessionManager.saveLanguageCode(languageCodes[which]);
+                    Toast.makeText(this, getString(R.string.language_saved, languageLabels[which]), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+                    recreate();
                 })
                 .show();
     }

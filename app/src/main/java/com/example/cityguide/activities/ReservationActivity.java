@@ -73,17 +73,17 @@ public class ReservationActivity extends BaseActivity {
         if (guideId > 0) {
             Guide guide = databaseHelper.getGuideById(guideId);
             if (guide != null) {
-                textTitle.setText("Book " + guide.getName());
+                textTitle.setText(getString(R.string.book_item, guide.getName()));
                 basePrice = guide.getPricePerHour();
             }
         } else if (experienceId > 0) {
             Experience experience = databaseHelper.getExperienceById(experienceId);
             if (experience != null) {
-                textTitle.setText("Book " + experience.getTitle());
+                textTitle.setText(getString(R.string.book_item, experience.getTitle()));
                 basePrice = experience.getPrice();
             }
         } else {
-            textTitle.setText("New Reservation");
+            textTitle.setText(R.string.new_reservation);
             basePrice = 200;
         }
         updateTotal();
@@ -94,12 +94,12 @@ public class ReservationActivity extends BaseActivity {
             return;
         }
         int hours = Integer.parseInt(spinnerHours.getSelectedItem().toString());
-        textTotal.setText("Total: " + (basePrice * hours) + " MAD");
+        textTotal.setText(getString(R.string.total_price, String.valueOf(basePrice * hours)));
     }
 
     private void confirmReservation() {
         if (sessionManager.isGuest() || !sessionManager.isLoggedIn()) {
-            Toast.makeText(this, "Sign in to save and manage reservations.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.signin_to_save_reservations, Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, SignInActivity.class));
             return;
         }
@@ -120,7 +120,7 @@ public class ReservationActivity extends BaseActivity {
             startActivity(new Intent(this, MyReservationsActivity.class));
             finish();
         } else {
-            Toast.makeText(this, "Could not save reservation.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.reservation_save_error, Toast.LENGTH_SHORT).show();
         }
     }
 }

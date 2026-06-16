@@ -40,15 +40,18 @@ public class ExperienceDetailsActivity extends BaseActivity {
         ((TextView) findViewById(R.id.textTitle)).setText(experience.getTitle());
         ((TextView) findViewById(R.id.textSubtitle)).setText(experience.getCity() + " - " + experience.getCategory());
         ((TextView) findViewById(R.id.textDescription)).setText(experience.getDescription());
-        ((TextView) findViewById(R.id.textMeta)).setText(experience.getDuration() + " - " + experience.getPrice() + " MAD - Rating " + experience.getRating());
+        ((TextView) findViewById(R.id.textMeta)).setText(getString(R.string.duration_price_rating_label,
+                experience.getDuration(),
+                String.valueOf(experience.getPrice()),
+                String.valueOf(experience.getRating())));
 
         findViewById(R.id.buttonFavorite).setOnClickListener(v -> {
             if (sessionManager.isGuest() || !sessionManager.isLoggedIn()) {
-                Toast.makeText(this, "Sign in to keep favorites across sessions.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.sign_in_required_favorites, Toast.LENGTH_SHORT).show();
                 return;
             }
             databaseHelper.addFavorite(sessionManager.getUserId(), experience.getId(), Constants.FAVORITE_EXPERIENCE);
-            Toast.makeText(this, "Added to favorites.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.added_to_favorites, Toast.LENGTH_SHORT).show();
         });
         findViewById(R.id.buttonBook).setOnClickListener(v -> {
             Intent intent = new Intent(this, ReservationActivity.class);

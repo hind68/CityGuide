@@ -40,7 +40,7 @@ public class SavedItinerariesActivity extends BaseActivity {
         if (sessionManager.isGuest() || !sessionManager.isLoggedIn()) {
             listItineraries.setVisibility(View.GONE);
             emptyState.setVisibility(View.VISIBLE);
-            emptyText.setText("Sign in to save and manage itineraries.");
+            emptyText.setText(R.string.itineraries_sign_in_empty);
             return;
         }
 
@@ -48,7 +48,7 @@ public class SavedItinerariesActivity extends BaseActivity {
         if (itineraries.isEmpty()) {
             listItineraries.setVisibility(View.GONE);
             emptyState.setVisibility(View.VISIBLE);
-            emptyText.setText("Saved routes from place details will appear here.");
+            emptyText.setText(R.string.itineraries_empty);
             return;
         }
 
@@ -67,7 +67,7 @@ public class SavedItinerariesActivity extends BaseActivity {
             @Override
             public void onRemove(SavedItinerary itinerary) {
                 databaseHelper.removeSavedItinerary(itinerary.getId(), sessionManager.getUserId());
-                Toast.makeText(SavedItinerariesActivity.this, "Itinerary removed.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SavedItinerariesActivity.this, R.string.itinerary_removed, Toast.LENGTH_SHORT).show();
                 loadItineraries();
             }
         }));

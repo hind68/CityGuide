@@ -48,23 +48,23 @@ public class SignUpActivity extends BaseActivity {
 
         if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(email) || TextUtils.isEmpty(phone)
                 || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
-            Toast.makeText(this, "Please complete all fields.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.signup_missing_fields, Toast.LENGTH_SHORT).show();
             return;
         }
         if (!password.equals(confirmPassword)) {
-            Toast.makeText(this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.signup_passwords_mismatch, Toast.LENGTH_SHORT).show();
             return;
         }
         if (databaseHelper.isEmailExists(email)) {
-            Toast.makeText(this, "This email is already registered.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.signup_email_exists, Toast.LENGTH_SHORT).show();
             return;
         }
         boolean created = databaseHelper.createUser(fullName, email, password, phone);
         if (created) {
-            Toast.makeText(this, "Account created. Please sign in.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.signup_success, Toast.LENGTH_SHORT).show();
             openSignIn();
         } else {
-            Toast.makeText(this, "Could not create account.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.signup_error, Toast.LENGTH_SHORT).show();
         }
     }
 

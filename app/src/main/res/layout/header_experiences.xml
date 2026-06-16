@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Authentic Experiences"
+        android:text="@string/authentic_experiences"
         android:textColor="@color/deep_navy_blue"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:text="Food tours, medina walks, souk shopping and cultural visits."
+        android:text="@string/experiences_subtitle"
         android:textColor="@color/olive_shadow"
         android:textSize="15sp" />
 </LinearLayout>

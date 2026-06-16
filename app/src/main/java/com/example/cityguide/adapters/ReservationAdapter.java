@@ -49,8 +49,12 @@ public class ReservationAdapter extends BaseAdapter {
         }
         Reservation reservation = getItem(position);
         ((TextView) view.findViewById(R.id.textItemTitle)).setText(reservation.getTitle());
-        ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(reservation.getDate() + " at " + reservation.getTime());
-        ((TextView) view.findViewById(R.id.textItemDescription)).setText(reservation.getNumberOfHours() + " hours - " + reservation.getTotalPrice() + " MAD");
+        ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(parent.getContext().getString(
+                R.string.date_at_time, reservation.getDate(), reservation.getTime()));
+        ((TextView) view.findViewById(R.id.textItemDescription)).setText(parent.getContext().getString(
+                R.string.hours_price_label,
+                String.valueOf(reservation.getNumberOfHours()),
+                String.valueOf(reservation.getTotalPrice())));
         ((TextView) view.findViewById(R.id.textStatusBadge)).setText(reservation.getStatus());
         Button cancelButton = view.findViewById(R.id.buttonCancelReservation);
         boolean isCancelled = "Cancelled".equalsIgnoreCase(reservation.getStatus());

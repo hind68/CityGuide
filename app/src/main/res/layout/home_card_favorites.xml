@@ -3,6 +3,6 @@
     android:id="@+id/cardFavorites"
     style="@style/HomeCardStyle">
     <ImageView style="@style/HomeCardIconStyle" android:src="@drawable/ic_favorite" />
-    <TextView style="@style/HomeCardTitleStyle" android:text="Favorites" />
-    <TextView style="@style/HomeCardBodyStyle" android:text="Your saved places, guides and experiences." />
+    <TextView style="@style/HomeCardTitleStyle" android:text="@string/favorites" />
+    <TextView style="@style/HomeCardBodyStyle" android:text="@string/favorites_card_body" />
 </LinearLayout>

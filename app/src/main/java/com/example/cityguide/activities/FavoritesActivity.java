@@ -54,7 +54,7 @@ public class FavoritesActivity extends BaseActivity {
             listFavorites.setVisibility(View.GONE);
             emptyState.setVisibility(View.VISIBLE);
             signInButton.setVisibility(View.VISIBLE);
-            emptyText.setText("Sign in to keep your favorites across sessions.");
+            emptyText.setText(R.string.favorites_sign_in_empty);
             return;
         }
 
@@ -71,7 +71,7 @@ public class FavoritesActivity extends BaseActivity {
             listFavorites.setVisibility(View.GONE);
             emptyState.setVisibility(View.VISIBLE);
             signInButton.setVisibility(View.GONE);
-            emptyText.setText("Save places, guides and experiences to see them here.");
+            emptyText.setText(R.string.favorites_empty);
         } else {
             emptyState.setVisibility(View.GONE);
             signInButton.setVisibility(View.GONE);
@@ -80,7 +80,7 @@ public class FavoritesActivity extends BaseActivity {
                 @Override
                 public void onRemove(Favorite favorite) {
                     databaseHelper.removeFavorite(favorite.getId());
-                    Toast.makeText(FavoritesActivity.this, "Removed from favorites.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FavoritesActivity.this, R.string.removed_from_favorites, Toast.LENGTH_SHORT).show();
                     loadFavorites();
                 }
 
@@ -104,7 +104,7 @@ public class FavoritesActivity extends BaseActivity {
             intent = new Intent(this, ExperienceDetailsActivity.class);
             intent.putExtra(Constants.EXTRA_EXPERIENCE_ID, favorite.getItemId());
         } else {
-            Toast.makeText(this, "Details are not available yet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.favorite_details_unavailable, Toast.LENGTH_SHORT).show();
             return;
         }
         startActivity(intent);

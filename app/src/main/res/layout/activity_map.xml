@@ -44,7 +44,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/btn_primary"
-            android:text="Open External Map"
+            android:text="@string/open_external_map"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -54,7 +54,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/btn_secondary"
-            android:text="Save This Visit"
+            android:text="@string/save_this_visit"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:visibility="gone" />

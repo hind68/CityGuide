@@ -40,7 +40,7 @@ public class MyReservationsActivity extends BaseActivity {
         if (sessionManager.isGuest() || !sessionManager.isLoggedIn()) {
             listReservations.setVisibility(View.GONE);
             emptyState.setVisibility(View.VISIBLE);
-            emptyText.setText("Sign in to save and manage your reservations.");
+            emptyText.setText(R.string.reservations_sign_in_empty);
             findViewById(R.id.buttonSignIn).setOnClickListener(v ->
                     startActivity(new Intent(this, SignInActivity.class)));
             return;
@@ -51,16 +51,16 @@ public class MyReservationsActivity extends BaseActivity {
             listReservations.setVisibility(View.GONE);
             emptyState.setVisibility(View.VISIBLE);
             findViewById(R.id.buttonSignIn).setVisibility(View.GONE);
-            emptyText.setText("Your reservations will appear here after booking a guide or experience.");
+            emptyText.setText(R.string.reservations_empty);
         } else {
             emptyState.setVisibility(View.GONE);
             listReservations.setVisibility(View.VISIBLE);
             listReservations.setAdapter(new ReservationAdapter(reservations, reservation -> {
                 if (databaseHelper.cancelReservation(reservation.getId(), sessionManager.getUserId())) {
-                    Toast.makeText(this, "Reservation cancelled.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.reservation_cancelled, Toast.LENGTH_SHORT).show();
                     loadReservations();
                 } else {
-                    Toast.makeText(this, "Could not cancel reservation.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.reservation_cancel_error, Toast.LENGTH_SHORT).show();
                 }
             }));
         }

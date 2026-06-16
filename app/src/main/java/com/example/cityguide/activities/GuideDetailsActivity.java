@@ -41,17 +41,20 @@ public class GuideDetailsActivity extends BaseActivity {
         ((TextView) findViewById(R.id.textTitle)).setText(guide.getName());
         ((TextView) findViewById(R.id.textSubtitle)).setText(guide.getCity() + " - " + guide.getSpecialty());
         ((TextView) findViewById(R.id.textDescription)).setText(guide.getDescription());
-        ((TextView) findViewById(R.id.textMeta)).setText(guide.getLanguages() + "\n" + guide.getPricePerHour() + " MAD/hour - Rating " + guide.getRating());
+        ((TextView) findViewById(R.id.textMeta)).setText(guide.getLanguages() + "\n"
+                + getString(R.string.price_rating_label,
+                String.valueOf(guide.getPricePerHour()),
+                String.valueOf(guide.getRating())));
 
         findViewById(R.id.buttonCall).setOnClickListener(v -> IntentUtils.callPhone(this, guide.getPhone()));
         findViewById(R.id.buttonEmail).setOnClickListener(v -> IntentUtils.sendEmail(this, guide.getEmail(), "CityGuide+ booking request"));
         findViewById(R.id.buttonFavorite).setOnClickListener(v -> {
             if (sessionManager.isGuest() || !sessionManager.isLoggedIn()) {
-                Toast.makeText(this, "Sign in to keep favorites across sessions.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.sign_in_required_favorites, Toast.LENGTH_SHORT).show();
                 return;
             }
             databaseHelper.addFavorite(sessionManager.getUserId(), guide.getId(), Constants.FAVORITE_GUIDE);
-            Toast.makeText(this, "Added to favorites.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.added_to_favorites, Toast.LENGTH_SHORT).show();
         });
         findViewById(R.id.buttonBook).setOnClickListener(v -> {
             Intent intent = new Intent(this, ReservationActivity.class);

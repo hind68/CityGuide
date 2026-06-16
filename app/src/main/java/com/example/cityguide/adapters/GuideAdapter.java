@@ -56,11 +56,14 @@ public class GuideAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.textItemTitle)).setText(guide.getName());
         ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(guide.getCity() + " - " + guide.getSpecialty());
         ((TextView) view.findViewById(R.id.textItemDescription)).setText(guide.getLanguages());
-        ((TextView) view.findViewById(R.id.textItemMeta)).setText(guide.getPricePerHour() + " MAD/hour - Rating " + guide.getRating());
+        ((TextView) view.findViewById(R.id.textItemMeta)).setText(parent.getContext().getString(
+                R.string.price_rating_label,
+                String.valueOf(guide.getPricePerHour()),
+                String.valueOf(guide.getRating())));
 
         Button profileButton = view.findViewById(R.id.buttonPrimary);
         profileButton.setBackgroundTintList((ColorStateList) null);
-        profileButton.setText("View Profile");
+        profileButton.setText(R.string.view_profile);
         profileButton.setOnClickListener(v -> listener.onProfile(guide));
         view.setOnClickListener(v -> listener.onProfile(guide));
         return view;

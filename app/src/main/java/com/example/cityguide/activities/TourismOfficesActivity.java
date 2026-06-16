@@ -30,7 +30,7 @@ public class TourismOfficesActivity extends BaseActivity {
 
         ListView listOffices = findViewById(R.id.listTourismOffices);
         TextView header = new TextView(this);
-        header.setText("Tourism Offices");
+        header.setText(R.string.tourism_offices);
         header.setTextColor(getResources().getColor(R.color.deep_navy_blue));
         header.setTextSize(30);
         header.setTypeface(null, android.graphics.Typeface.BOLD);
@@ -49,7 +49,7 @@ public class TourismOfficesActivity extends BaseActivity {
             @Override
             public void onSms(TourismOffice office) {
                 IntentUtils.sendSms(TourismOfficesActivity.this, office.getSmsNumber(),
-                        "Hello, I need tourism information about " + office.getCity() + ".");
+                        getString(R.string.tourism_sms_message, office.getCity()));
             }
         }));
     }

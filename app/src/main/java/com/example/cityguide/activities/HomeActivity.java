@@ -29,11 +29,11 @@ public class HomeActivity extends BaseActivity {
         databaseHelper = new DatabaseHelper(this);
         TextView greeting = findViewById(R.id.textGreeting);
         if (sessionManager.isGuest()) {
-            greeting.setText("Welcome, guest traveler");
+            greeting.setText(R.string.welcome_guest);
         } else if (sessionManager.isLoggedIn()) {
-            greeting.setText("Welcome, " + sessionManager.getUserName());
+            greeting.setText(getString(R.string.welcome_user, sessionManager.getUserName()));
         } else {
-            greeting.setText("Welcome to CityGuide+");
+            greeting.setText(R.string.welcome_cityguide);
         }
 
         findViewById(R.id.actionProfile).setOnClickListener(v -> open(SettingsActivity.class));
@@ -100,16 +100,16 @@ public class HomeActivity extends BaseActivity {
 
     private void saveFavorite(DatabaseHelper databaseHelper, SessionManager sessionManager, String placeName) {
         if (sessionManager.isGuest() || !sessionManager.isLoggedIn()) {
-            Toast.makeText(this, "Sign in to keep favorites across sessions.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.sign_in_required_favorites, Toast.LENGTH_SHORT).show();
             return;
         }
         int placeId = findPlaceId(databaseHelper, placeName);
         if (placeId == -1) {
-            Toast.makeText(this, "Place not found yet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.place_not_found, Toast.LENGTH_SHORT).show();
             return;
         }
         databaseHelper.addFavorite(sessionManager.getUserId(), placeId, Constants.FAVORITE_PLACE);
-        Toast.makeText(this, "Added to favorites.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.added_to_favorites, Toast.LENGTH_SHORT).show();
     }
 
     private void openPlaceDetails(DatabaseHelper databaseHelper, String placeName) {
@@ -144,8 +144,8 @@ public class HomeActivity extends BaseActivity {
 
         if (latestRecentView == null) {
             ImageLoader.load(imageRecent, "place_chefchaouen");
-            title.setText("Start Exploring");
-            subtitle.setText("Recently viewed places will appear here");
+            title.setText(R.string.start_exploring);
+            subtitle.setText(R.string.recent_empty_home);
             return;
         }
 

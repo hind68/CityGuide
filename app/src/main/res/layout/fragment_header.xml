@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Plan your Moroccan journey"
+        android:text="@string/plan_journey"
         android:textColor="@color/olive_shadow"
         android:textSize="15sp" />
 </LinearLayout>

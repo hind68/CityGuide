@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Profile"
+            android:text="@string/profile"
             android:textColor="@color/deep_navy_blue"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -83,7 +83,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/btn_secondary"
-            android:text="Edit Profile"
+            android:text="@string/edit_profile"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -91,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
-            android:text="My Travel Space"
+            android:text="@string/my_travel_space"
             android:textColor="@color/deep_navy_blue"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -102,7 +102,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/btn_primary"
-            android:text="My Reservations"
+            android:text="@string/my_reservations"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -112,7 +112,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/btn_secondary"
-            android:text="Recently Viewed"
+            android:text="@string/recently_viewed"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -122,7 +122,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/btn_secondary"
-            android:text="Saved Itineraries"
+            android:text="@string/saved_itineraries"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -132,7 +132,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/btn_secondary"
-            android:text="Tourism Offices"
+            android:text="@string/tourism_offices"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -142,7 +142,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/btn_secondary"
-            android:text="Language"
+            android:text="@string/language"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -152,7 +152,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="22dp"
             android:background="@drawable/btn_danger"
-            android:text="Logout"
+            android:text="@string/logout"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -162,7 +162,7 @@
             android:layout_height="54dp"
             android:layout_marginTop="22dp"
             android:background="@drawable/btn_primary"
-            android:text="Sign In"
+            android:text="@string/sign_in"
             android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>

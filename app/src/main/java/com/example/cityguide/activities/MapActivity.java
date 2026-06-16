@@ -65,12 +65,12 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         label = getIntent().getStringExtra(Constants.EXTRA_LABEL);
         hasTargetPlace = label != null && !label.trim().isEmpty();
         if (!hasTargetPlace) {
-            label = "Explore Morocco";
+            label = getString(R.string.explore_morocco);
         }
 
         ((TextView) findViewById(R.id.textMapTitle)).setText(label);
         ((TextView) findViewById(R.id.textMapCoordinates)).setText(
-                hasTargetPlace ? latitude + ", " + longitude : "Showing nearby places and Moroccan highlights"
+                hasTargetPlace ? latitude + ", " + longitude : getString(R.string.map_default_subtitle)
         );
         findViewById(R.id.buttonOpenExternalMap).setOnClickListener(v ->
                 IntentUtils.openMap(this, latitude, longitude, label));
@@ -144,15 +144,15 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
 
     private void saveSelectedPlace() {
         if (!canSaveItinerary()) {
-            Toast.makeText(this, "Sign in to save visited places.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.signin_to_save_visited, Toast.LENGTH_SHORT).show();
             return;
         }
         if (selectedPlace == null) {
-            Toast.makeText(this, "Choose a marker first.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.choose_marker_first, Toast.LENGTH_SHORT).show();
             return;
         }
         databaseHelper.addSavedItinerary(sessionManager.getUserId(), selectedPlace.getId());
-        Toast.makeText(this, "Visit saved.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.visit_saved, Toast.LENGTH_SHORT).show();
         refreshMarkers();
         updateSaveButton();
     }
@@ -169,9 +169,9 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         button.setVisibility(selectedPlace == null ? View.GONE : View.VISIBLE);
         if (selectedPlace != null && canSaveItinerary()
                 && databaseHelper.isSavedItinerary(sessionManager.getUserId(), selectedPlace.getId())) {
-            ((TextView) button).setText("Saved as Visited");
+            ((TextView) button).setText(R.string.saved_as_visited);
         } else {
-            ((TextView) button).setText("Save This Visit");
+            ((TextView) button).setText(R.string.save_this_visit);
         }
     }
 
@@ -206,7 +206,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         LatLng currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
         googleMap.addMarker(new MarkerOptions()
                 .position(currentPosition)
-                .title("Your location")
+                .title(getString(R.string.your_location))
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
         if (!hasTargetPlace) {
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentPosition, 13f));
@@ -235,7 +235,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
             selectedPlace = nearestVisited;
             refreshMarkers();
             updateSaveButton();
-            Toast.makeText(this, nearestVisited.getName() + " saved as visited.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.visited_auto_saved, nearestVisited.getName()), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -295,7 +295,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
                 return;
             }
             ((TextView) activity.findViewById(R.id.textMapCoordinates))
-                    .setText("Nearest suggestion: " + place.getName() + " - " + place.getCity());
+                    .setText(activity.getString(R.string.nearest_suggestion, place.getName(), place.getCity()));
             NotificationHelper.notifyNearbyPlace(activity, place);
         }
     }

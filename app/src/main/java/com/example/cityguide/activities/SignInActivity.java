@@ -43,13 +43,13 @@ public class SignInActivity extends BaseActivity {
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please enter your email and password.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.signin_missing_fields, Toast.LENGTH_SHORT).show();
             return;
         }
 
         User user = databaseHelper.loginUser(email, password);
         if (user == null) {
-            Toast.makeText(this, "Invalid email or password.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.signin_invalid, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -64,7 +64,7 @@ public class SignInActivity extends BaseActivity {
         sessionManager.setLoggedIn(false);
         sessionManager.setGuest(true);
         sessionManager.saveUserId(-1);
-        sessionManager.saveUserName("Guest traveler");
+        sessionManager.saveUserName(getString(R.string.guest_name));
         openHome();
     }
 

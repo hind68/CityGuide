@@ -55,7 +55,7 @@ public class SavedItineraryAdapter extends BaseAdapter {
         ImageLoader.load((ImageView) view.findViewById(R.id.imageItinerary), itinerary.getImage());
         ((TextView) view.findViewById(R.id.textItemTitle)).setText(itinerary.getTitle());
         ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(itinerary.getSubtitle());
-        ((TextView) view.findViewById(R.id.textItemMeta)).setText("SAVED ROUTE");
+        ((TextView) view.findViewById(R.id.textItemMeta)).setText(R.string.saved_route);
         view.findViewById(R.id.buttonOpenItinerary).setOnClickListener(v -> listener.onOpen(itinerary));
         Button removeButton = view.findViewById(R.id.buttonRemoveItinerary);
         removeButton.setOnClickListener(v -> listener.onRemove(itinerary));

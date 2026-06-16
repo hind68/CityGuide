@@ -57,14 +57,15 @@ public class PlaceAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.textItemTitle)).setText(place.getName());
         ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(place.getCity() + " - " + place.getCategory());
         ((TextView) view.findViewById(R.id.textItemDescription)).setText(place.getDescription());
-        ((TextView) view.findViewById(R.id.textItemMeta)).setText("Rating " + place.getRating());
+        ((TextView) view.findViewById(R.id.textItemMeta)).setText(parent.getContext().getString(
+                R.string.rating_label, String.valueOf(place.getRating())));
 
         Button detailsButton = view.findViewById(R.id.buttonPrimary);
         Button mapButton = view.findViewById(R.id.buttonSecondary);
         detailsButton.setBackgroundTintList((ColorStateList) null);
         mapButton.setBackgroundTintList((ColorStateList) null);
-        detailsButton.setText("View Details");
-        mapButton.setText("View Map");
+        detailsButton.setText(R.string.view_details);
+        mapButton.setText(R.string.view_map);
         detailsButton.setOnClickListener(v -> listener.onDetails(place));
         mapButton.setOnClickListener(v -> listener.onMap(place));
         view.setOnClickListener(v -> listener.onDetails(place));

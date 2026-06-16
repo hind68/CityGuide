@@ -70,7 +70,8 @@ public class PlaceDetailsActivity extends BaseActivity {
         ((TextView) findViewById(R.id.textSubtitle)).setText(place.getCity() + " - " + place.getCategory());
         ((TextView) findViewById(R.id.textDescription)).setText(place.getDescription());
         ((TextView) findViewById(R.id.textAddress)).setText(place.getAddress());
-        ((TextView) findViewById(R.id.textMeta)).setText("Rating " + place.getRating() + " - " + place.getPhone());
+        ((TextView) findViewById(R.id.textMeta)).setText(getString(R.string.rating_phone_label,
+                String.valueOf(place.getRating()), place.getPhone()));
         bindUserPhoto();
 
         findViewById(R.id.buttonOpenMap).setOnClickListener(v ->
@@ -80,11 +81,11 @@ public class PlaceDetailsActivity extends BaseActivity {
         findViewById(R.id.buttonSaveItinerary).setOnClickListener(v -> saveItinerary());
         findViewById(R.id.buttonFavorite).setOnClickListener(v -> {
             if (sessionManager.isGuest() || !sessionManager.isLoggedIn()) {
-                Toast.makeText(this, "Sign in to keep favorites across sessions.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.sign_in_required_favorites, Toast.LENGTH_SHORT).show();
                 return;
             }
             databaseHelper.addFavorite(sessionManager.getUserId(), place.getId(), Constants.FAVORITE_PLACE);
-            Toast.makeText(this, "Added to favorites.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.added_to_favorites, Toast.LENGTH_SHORT).show();
         });
         findViewById(R.id.buttonViewMapScreen).setOnClickListener(v -> {
             Intent intent = new Intent(this, MapActivity.class);
@@ -112,7 +113,7 @@ public class PlaceDetailsActivity extends BaseActivity {
 
     private void startCameraFlow() {
         if (sessionManager.isGuest() || !sessionManager.isLoggedIn()) {
-            Toast.makeText(this, "Sign in to add personal photos.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.photo_sign_in_required, Toast.LENGTH_SHORT).show();
             return;
         }
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -125,7 +126,7 @@ public class PlaceDetailsActivity extends BaseActivity {
     private void openCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getPackageManager()) == null) {
-            Toast.makeText(this, "No camera app is available.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.no_camera_available, Toast.LENGTH_SHORT).show();
             return;
         }
         try {
@@ -139,7 +140,7 @@ public class PlaceDetailsActivity extends BaseActivity {
                 startActivityForResult(intent, CAMERA_REQUEST_CODE);
             } catch (RuntimeException e) {
                 revokeUriPermission(photoUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                Toast.makeText(this, "Could not open the camera on this device.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.camera_open_error, Toast.LENGTH_SHORT).show();
             }
         } catch (IOException | IllegalArgumentException e) {
             pendingPhotoPath = null;
@@ -152,7 +153,7 @@ public class PlaceDetailsActivity extends BaseActivity {
         try {
             startActivityForResult(fallbackIntent, CAMERA_REQUEST_CODE);
         } catch (RuntimeException e) {
-            Toast.makeText(this, "Could not open the camera on this device.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.camera_open_error, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -179,11 +180,11 @@ public class PlaceDetailsActivity extends BaseActivity {
 
     private void saveItinerary() {
         if (sessionManager.isGuest() || !sessionManager.isLoggedIn()) {
-            Toast.makeText(this, "Sign in to save itineraries.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.signin_to_save_itineraries, Toast.LENGTH_SHORT).show();
             return;
         }
         databaseHelper.addSavedItinerary(sessionManager.getUserId(), place.getId());
-        Toast.makeText(this, "Itinerary saved.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.itinerary_saved, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -204,10 +205,10 @@ public class PlaceDetailsActivity extends BaseActivity {
         if (imagePath != null && !imagePath.trim().isEmpty()) {
             databaseHelper.addUserPlacePhoto(sessionManager.getUserId(), place.getId(), imagePath);
             pendingPhotoPath = null;
-            Toast.makeText(this, "Photo added to this place.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.photo_added, Toast.LENGTH_SHORT).show();
             bindUserPhoto();
         } else {
-            Toast.makeText(this, "Photo was not saved by the camera.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.photo_not_saved, Toast.LENGTH_SHORT).show();
         }
     }
 

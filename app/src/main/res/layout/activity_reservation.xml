@@ -70,7 +70,7 @@
                 android:layout_height="54dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/btn_primary"
-                android:text="Confirm Reservation"
+                android:text="@string/confirm_reservation"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
         </LinearLayout>

@@ -43,7 +43,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Recently Viewed"
+            android:text="@string/recently_viewed"
             android:textColor="@color/deep_navy_blue"
             android:textSize="30sp"
             android:textStyle="bold" />

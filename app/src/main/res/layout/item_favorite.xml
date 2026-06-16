@@ -31,7 +31,7 @@
             android:layout_gravity="top|end"
             android:layout_margin="12dp"
             android:background="@drawable/btn_primary"
-            android:text="Remove"
+            android:text="@string/remove"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="12sp"
