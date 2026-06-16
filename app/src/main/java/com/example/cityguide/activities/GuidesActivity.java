@@ -17,6 +17,7 @@ public class GuidesActivity extends BaseActivity {
         setContentView(R.layout.activity_guides);
 
         ListView listGuides = findViewById(R.id.listGuides);
+        listGuides.addHeaderView(getLayoutInflater().inflate(R.layout.header_guides, listGuides, false), null, false);
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
         listGuides.setAdapter(new GuideAdapter(databaseHelper.getGuides(), guide -> {
             Intent intent = new Intent(this, GuideDetailsActivity.class);

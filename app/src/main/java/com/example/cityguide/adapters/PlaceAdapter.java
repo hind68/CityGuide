@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cityguide.R;
 import com.example.cityguide.models.Place;
+import com.example.cityguide.utils.ImageLoader;
 
 import java.util.List;
 
@@ -51,9 +53,9 @@ public class PlaceAdapter extends BaseAdapter {
         }
 
         Place place = getItem(position);
-        ((TextView) view.findViewById(R.id.textInitial)).setText(place.getName().substring(0, 1));
+        ImageLoader.load((ImageView) view.findViewById(R.id.imageItem), place.getImage());
         ((TextView) view.findViewById(R.id.textItemTitle)).setText(place.getName());
-        ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(place.getCity() + " · " + place.getCategory());
+        ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(place.getCity() + " - " + place.getCategory());
         ((TextView) view.findViewById(R.id.textItemDescription)).setText(place.getDescription());
         ((TextView) view.findViewById(R.id.textItemMeta)).setText("Rating " + place.getRating());
 

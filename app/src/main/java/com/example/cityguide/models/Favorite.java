@@ -7,21 +7,27 @@ public class Favorite {
     private String itemType;
     private String title;
     private String subtitle;
+    private String image;
 
     public Favorite() {
     }
 
     public Favorite(int id, int userId, int itemId, String itemType) {
-        this(id, userId, itemId, itemType, "", "");
+        this(id, userId, itemId, itemType, "", "", "");
     }
 
     public Favorite(int id, int userId, int itemId, String itemType, String title, String subtitle) {
+        this(id, userId, itemId, itemType, title, subtitle, "");
+    }
+
+    public Favorite(int id, int userId, int itemId, String itemType, String title, String subtitle, String image) {
         this.id = id;
         this.userId = userId;
         this.itemId = itemId;
         this.itemType = itemType;
         this.title = title;
         this.subtitle = subtitle;
+        this.image = image;
     }
 
     public int getId() {
@@ -70,5 +76,13 @@ public class Favorite {
 
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

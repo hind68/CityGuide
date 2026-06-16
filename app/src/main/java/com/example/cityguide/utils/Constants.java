@@ -8,6 +8,9 @@ public final class Constants {
     public static final String EXTRA_LATITUDE = "extra_latitude";
     public static final String EXTRA_LONGITUDE = "extra_longitude";
     public static final String EXTRA_LABEL = "extra_label";
+    public static final String EXTRA_CITY = "extra_city";
+    public static final String EXTRA_CATEGORY = "extra_category";
+    public static final String EXTRA_SEARCH_QUERY = "extra_search_query";
     public static final String FAVORITE_PLACE = "place";
     public static final String FAVORITE_GUIDE = "guide";
     public static final String FAVORITE_EXPERIENCE = "experience";

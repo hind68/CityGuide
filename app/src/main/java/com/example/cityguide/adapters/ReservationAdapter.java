@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.cityguide.R;
@@ -13,10 +14,16 @@ import java.util.List;
 
 public class ReservationAdapter extends BaseAdapter {
 
-    private final List<Reservation> reservations;
+    public interface OnReservationActionListener {
+        void onCancel(Reservation reservation);
+    }
 
-    public ReservationAdapter(List<Reservation> reservations) {
+    private final List<Reservation> reservations;
+    private final OnReservationActionListener listener;
+
+    public ReservationAdapter(List<Reservation> reservations, OnReservationActionListener listener) {
         this.reservations = reservations;
+        this.listener = listener;
     }
 
     @Override
@@ -43,8 +50,12 @@ public class ReservationAdapter extends BaseAdapter {
         Reservation reservation = getItem(position);
         ((TextView) view.findViewById(R.id.textItemTitle)).setText(reservation.getTitle());
         ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(reservation.getDate() + " at " + reservation.getTime());
-        ((TextView) view.findViewById(R.id.textItemDescription)).setText(reservation.getNumberOfHours() + " hours · " + reservation.getTotalPrice() + " MAD");
+        ((TextView) view.findViewById(R.id.textItemDescription)).setText(reservation.getNumberOfHours() + " hours - " + reservation.getTotalPrice() + " MAD");
         ((TextView) view.findViewById(R.id.textStatusBadge)).setText(reservation.getStatus());
+        Button cancelButton = view.findViewById(R.id.buttonCancelReservation);
+        boolean isCancelled = "Cancelled".equalsIgnoreCase(reservation.getStatus());
+        cancelButton.setVisibility(isCancelled ? View.GONE : View.VISIBLE);
+        cancelButton.setOnClickListener(v -> listener.onCancel(reservation));
         return view;
     }
 }

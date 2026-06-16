@@ -36,6 +36,7 @@ public class SplashActivity extends BaseActivity {
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             startActivity(new Intent(SplashActivity.this, WelcomeActivity.class));
             finish();
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }, SPLASH_DELAY_MS);
     }
 }

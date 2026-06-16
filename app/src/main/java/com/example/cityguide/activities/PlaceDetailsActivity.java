@@ -2,6 +2,7 @@ package com.example.cityguide.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -9,12 +10,18 @@ import com.example.cityguide.R;
 import com.example.cityguide.database.DatabaseHelper;
 import com.example.cityguide.models.Place;
 import com.example.cityguide.utils.Constants;
+import com.example.cityguide.utils.ImageLoader;
 import com.example.cityguide.utils.IntentUtils;
 import com.example.cityguide.utils.SessionManager;
 
 public class PlaceDetailsActivity extends BaseActivity {
 
     private Place place;
+
+    @Override
+    protected int getPageTopInsetDp() {
+        return 0;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +37,13 @@ public class PlaceDetailsActivity extends BaseActivity {
             return;
         }
 
+        ImageLoader.load((ImageView) findViewById(R.id.imageHero), place.getImage());
+        databaseHelper.addRecentView(getTrackingUserId(sessionManager), place.getId(), Constants.FAVORITE_PLACE);
         ((TextView) findViewById(R.id.textTitle)).setText(place.getName());
-        ((TextView) findViewById(R.id.textSubtitle)).setText(place.getCity() + " · " + place.getCategory());
+        ((TextView) findViewById(R.id.textSubtitle)).setText(place.getCity() + " - " + place.getCategory());
         ((TextView) findViewById(R.id.textDescription)).setText(place.getDescription());
         ((TextView) findViewById(R.id.textAddress)).setText(place.getAddress());
-        ((TextView) findViewById(R.id.textMeta)).setText("Rating " + place.getRating() + " · " + place.getPhone());
+        ((TextView) findViewById(R.id.textMeta)).setText("Rating " + place.getRating() + " - " + place.getPhone());
 
         findViewById(R.id.buttonOpenMap).setOnClickListener(v ->
                 IntentUtils.openMap(this, place.getLatitude(), place.getLongitude(), place.getName()));
@@ -54,5 +63,9 @@ public class PlaceDetailsActivity extends BaseActivity {
             intent.putExtra(Constants.EXTRA_LABEL, place.getName());
             startActivity(intent);
         });
+    }
+
+    private int getTrackingUserId(SessionManager sessionManager) {
+        return sessionManager.isLoggedIn() ? sessionManager.getUserId() : 0;
     }
 }

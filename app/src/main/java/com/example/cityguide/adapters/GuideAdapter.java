@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cityguide.R;
 import com.example.cityguide.models.Guide;
+import com.example.cityguide.utils.ImageLoader;
 
 import java.util.List;
 
@@ -50,11 +52,11 @@ public class GuideAdapter extends BaseAdapter {
         }
 
         Guide guide = getItem(position);
-        ((TextView) view.findViewById(R.id.textInitial)).setText(guide.getName().substring(0, 1));
+        ImageLoader.load((ImageView) view.findViewById(R.id.imageGuide), guide.getImage(), R.drawable.user_placeholder);
         ((TextView) view.findViewById(R.id.textItemTitle)).setText(guide.getName());
-        ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(guide.getCity() + " · " + guide.getSpecialty());
+        ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(guide.getCity() + " - " + guide.getSpecialty());
         ((TextView) view.findViewById(R.id.textItemDescription)).setText(guide.getLanguages());
-        ((TextView) view.findViewById(R.id.textItemMeta)).setText(guide.getPricePerHour() + " MAD/hour · Rating " + guide.getRating());
+        ((TextView) view.findViewById(R.id.textItemMeta)).setText(guide.getPricePerHour() + " MAD/hour - Rating " + guide.getRating());
 
         Button profileButton = view.findViewById(R.id.buttonPrimary);
         profileButton.setBackgroundTintList((ColorStateList) null);

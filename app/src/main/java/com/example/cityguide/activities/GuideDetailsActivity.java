@@ -2,6 +2,7 @@ package com.example.cityguide.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -9,12 +10,18 @@ import com.example.cityguide.R;
 import com.example.cityguide.database.DatabaseHelper;
 import com.example.cityguide.models.Guide;
 import com.example.cityguide.utils.Constants;
+import com.example.cityguide.utils.ImageLoader;
 import com.example.cityguide.utils.IntentUtils;
 import com.example.cityguide.utils.SessionManager;
 
 public class GuideDetailsActivity extends BaseActivity {
 
     private Guide guide;
+
+    @Override
+    protected int getPageTopInsetDp() {
+        return 0;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +36,12 @@ public class GuideDetailsActivity extends BaseActivity {
             return;
         }
 
+        ImageLoader.load((ImageView) findViewById(R.id.imageHero), guide.getImage(), R.drawable.user_placeholder);
+        databaseHelper.addRecentView(getTrackingUserId(sessionManager), guide.getId(), Constants.FAVORITE_GUIDE);
         ((TextView) findViewById(R.id.textTitle)).setText(guide.getName());
-        ((TextView) findViewById(R.id.textSubtitle)).setText(guide.getCity() + " · " + guide.getSpecialty());
+        ((TextView) findViewById(R.id.textSubtitle)).setText(guide.getCity() + " - " + guide.getSpecialty());
         ((TextView) findViewById(R.id.textDescription)).setText(guide.getDescription());
-        ((TextView) findViewById(R.id.textMeta)).setText(guide.getLanguages() + "\n" + guide.getPricePerHour() + " MAD/hour · Rating " + guide.getRating());
+        ((TextView) findViewById(R.id.textMeta)).setText(guide.getLanguages() + "\n" + guide.getPricePerHour() + " MAD/hour - Rating " + guide.getRating());
 
         findViewById(R.id.buttonCall).setOnClickListener(v -> IntentUtils.callPhone(this, guide.getPhone()));
         findViewById(R.id.buttonEmail).setOnClickListener(v -> IntentUtils.sendEmail(this, guide.getEmail(), "CityGuide+ booking request"));
@@ -49,5 +58,9 @@ public class GuideDetailsActivity extends BaseActivity {
             intent.putExtra(Constants.EXTRA_GUIDE_ID, guide.getId());
             startActivity(intent);
         });
+    }
+
+    private int getTrackingUserId(SessionManager sessionManager) {
+        return sessionManager.isLoggedIn() ? sessionManager.getUserId() : 0;
     }
 }

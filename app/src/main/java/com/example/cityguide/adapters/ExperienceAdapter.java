@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cityguide.R;
 import com.example.cityguide.models.Experience;
+import com.example.cityguide.utils.ImageLoader;
 
 import java.util.List;
 
@@ -50,11 +52,11 @@ public class ExperienceAdapter extends BaseAdapter {
         }
 
         Experience experience = getItem(position);
-        ((TextView) view.findViewById(R.id.textInitial)).setText(experience.getTitle().substring(0, 1));
+        ImageLoader.load((ImageView) view.findViewById(R.id.imageItem), experience.getImage());
         ((TextView) view.findViewById(R.id.textItemTitle)).setText(experience.getTitle());
-        ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(experience.getCity() + " · " + experience.getCategory());
+        ((TextView) view.findViewById(R.id.textItemSubtitle)).setText(experience.getCity() + " - " + experience.getCategory());
         ((TextView) view.findViewById(R.id.textItemDescription)).setText(experience.getDescription());
-        ((TextView) view.findViewById(R.id.textItemMeta)).setText(experience.getDuration() + " · " + experience.getPrice() + " MAD · Rating " + experience.getRating());
+        ((TextView) view.findViewById(R.id.textItemMeta)).setText(experience.getDuration() + " - " + experience.getPrice() + " MAD - Rating " + experience.getRating());
 
         Button detailsButton = view.findViewById(R.id.buttonPrimary);
         detailsButton.setBackgroundTintList((ColorStateList) null);

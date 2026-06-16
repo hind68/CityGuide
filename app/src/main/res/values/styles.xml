@@ -98,6 +98,31 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="HomeTrendingCardStyle">
+        <item name="android:layout_width">272dp</item>
+        <item name="android:layout_height">220dp</item>
+        <item name="android:layout_marginRight">14dp</item>
+        <item name="android:background">@drawable/home_card</item>
+        <item name="android:clipToOutline">true</item>
+        <item name="android:elevation">6dp</item>
+    </style>
+
+    <style name="HomeTrendingTitleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/deep_navy_blue</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="HomeTrendingSubtitleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:textColor">@color/olive_shadow</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="HomeSmallPlaceCardStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">190dp</item>
@@ -121,6 +146,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/deep_navy_blue</item>
         <item name="android:textSize">17sp</item>
         <item name="android:textStyle">bold</item>
@@ -130,19 +157,20 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">4dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/olive_shadow</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="HomeGuideCardStyle">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">165dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:background">@drawable/home_card</item>
-        <item name="android:elevation">5dp</item>
+        <item name="android:layout_width">96dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:elevation">0dp</item>
         <item name="android:gravity">center</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:padding">14dp</item>
+        <item name="android:padding">0dp</item>
     </style>
 
     <style name="HomeAvatarStyle">
@@ -153,5 +181,13 @@
         <item name="android:textColor">@color/deep_navy_blue</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="HomeGuideImageStyle">
+        <item name="android:layout_width">78dp</item>
+        <item name="android:layout_height">78dp</item>
+        <item name="android:background">@drawable/avatar_circle</item>
+        <item name="android:clipToOutline">true</item>
+        <item name="android:scaleType">centerCrop</item>
     </style>
 </resources>

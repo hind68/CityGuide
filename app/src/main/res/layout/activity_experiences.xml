@@ -3,31 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cream"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:orientation="vertical"
     android:padding="18dp">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Authentic Experiences"
-        android:textColor="@color/deep_navy_blue"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Food tours, medina walks, souk shopping and cultural visits."
-        android:textColor="@color/olive_shadow"
-        android:textSize="15sp" />
 
     <ListView
         android:id="@+id/listExperiences"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:divider="@android:color/transparent"
-        android:dividerHeight="12dp" />
+        android:dividerHeight="4dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="14dp" />
 </LinearLayout>

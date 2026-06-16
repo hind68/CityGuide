@@ -2,6 +2,7 @@ package com.example.cityguide.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -13,7 +14,6 @@ import com.example.cityguide.models.Place;
 import com.example.cityguide.utils.Constants;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PlacesActivity extends BaseActivity {
@@ -30,18 +30,33 @@ public class PlacesActivity extends BaseActivity {
 
         databaseHelper = new DatabaseHelper(this);
         listPlaces = findViewById(R.id.listPlaces);
-        spinnerCity = findViewById(R.id.spinnerCity);
-        spinnerCategory = findViewById(R.id.spinnerCategory);
+        View header = getLayoutInflater().inflate(R.layout.header_places, listPlaces, false);
+        listPlaces.addHeaderView(header, null, false);
+        spinnerCity = header.findViewById(R.id.spinnerCity);
+        spinnerCategory = header.findViewById(R.id.spinnerCategory);
 
-        setupSpinner(spinnerCity, Arrays.asList("All Cities", "Marrakech", "Fes", "Rabat", "Casablanca", "Chefchaouen"));
-        setupSpinner(spinnerCategory, Arrays.asList("All Categories", "Garden", "Monument", "Medina", "Souk", "Landmark"));
-        findViewById(R.id.buttonApplyFilters).setOnClickListener(v -> loadPlaces());
+        setupSpinner(spinnerCity, databaseHelper.getPlaceCities());
+        setupSpinner(spinnerCategory, databaseHelper.getPlaceCategories());
+        selectSpinnerValue(spinnerCity, getIntent().getStringExtra(Constants.EXTRA_CITY));
+        selectSpinnerValue(spinnerCategory, getIntent().getStringExtra(Constants.EXTRA_CATEGORY));
+        header.findViewById(R.id.buttonApplyFilters).setOnClickListener(v -> loadPlaces());
         loadPlaces();
     }
 
     private void setupSpinner(Spinner spinner, List<String> values) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, values);
         spinner.setAdapter(adapter);
+    }
+
+    private void selectSpinnerValue(Spinner spinner, String value) {
+        if (value == null) {
+            return;
+        }
+        ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
+        int position = adapter.getPosition(value);
+        if (position >= 0) {
+            spinner.setSelection(position);
+        }
     }
 
     private void loadPlaces() {

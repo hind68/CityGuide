@@ -3,50 +3,52 @@ package com.example.cityguide.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Switch;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.cityguide.R;
+import com.example.cityguide.database.DatabaseHelper;
+import com.example.cityguide.models.User;
 import com.example.cityguide.utils.SessionManager;
-
-import java.util.Arrays;
 
 public class SettingsActivity extends BaseActivity {
 
+    private DatabaseHelper databaseHelper;
     private SessionManager sessionManager;
+    private TextView profileName;
+    private TextView profileEmail;
+    private TextView profileStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        databaseHelper = new DatabaseHelper(this);
         sessionManager = new SessionManager(this);
-        TextView profileSummary = findViewById(R.id.textProfileSummary);
-        Spinner citySpinner = findViewById(R.id.spinnerDefaultCity);
-        Spinner languageSpinner = findViewById(R.id.spinnerDefaultLanguage);
-        Switch darkModeSwitch = findViewById(R.id.switchDarkMode);
+        profileName = findViewById(R.id.textProfileName);
+        profileEmail = findViewById(R.id.textProfileEmail);
+        profileStatus = findViewById(R.id.textProfileStatus);
 
-        profileSummary.setText(sessionManager.isGuest()
-                ? "Guest mode"
-                : sessionManager.getUserName());
-        findViewById(R.id.buttonLogout).setVisibility(sessionManager.isGuest() ? View.GONE : View.VISIBLE);
-        findViewById(R.id.buttonSignIn).setVisibility(sessionManager.isGuest() ? View.VISIBLE : View.GONE);
+        bindProfile();
 
-        setupSpinner(citySpinner, new String[]{"Marrakech", "Fes", "Rabat", "Casablanca", "Chefchaouen"}, sessionManager.getDefaultCity());
-        setupSpinner(languageSpinner, new String[]{"English", "French", "Arabic", "Spanish"}, sessionManager.getDefaultLanguage());
-        darkModeSwitch.setChecked(sessionManager.isDarkMode());
-
-        findViewById(R.id.buttonSaveSettings).setOnClickListener(v -> {
-            sessionManager.saveDefaultCity(citySpinner.getSelectedItem().toString());
-            sessionManager.saveDefaultLanguage(languageSpinner.getSelectedItem().toString());
-            sessionManager.setDarkMode(darkModeSwitch.isChecked());
-        });
+        findViewById(R.id.buttonEditProfile).setOnClickListener(v -> showEditProfileDialog());
+        findViewById(R.id.buttonMyReservations).setOnClickListener(v ->
+                startActivity(new Intent(this, MyReservationsActivity.class)));
+        findViewById(R.id.buttonFavorites).setOnClickListener(v ->
+                startActivity(new Intent(this, FavoritesActivity.class)));
+        findViewById(R.id.buttonRecentlyViewed).setOnClickListener(v ->
+                startActivity(new Intent(this, RecentViewsActivity.class)));
 
         findViewById(R.id.buttonLogout).setOnClickListener(v -> {
             sessionManager.logout();
-            startActivity(new Intent(this, SignInActivity.class));
+            Intent intent = new Intent(this, SignInActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
             finish();
         });
 
@@ -54,12 +56,84 @@ public class SettingsActivity extends BaseActivity {
                 startActivity(new Intent(this, SignInActivity.class)));
     }
 
-    private void setupSpinner(Spinner spinner, String[] values, String selectedValue) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, Arrays.asList(values));
-        spinner.setAdapter(adapter);
-        int position = adapter.getPosition(selectedValue);
-        if (position >= 0) {
-            spinner.setSelection(position);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (sessionManager != null) {
+            bindProfile();
         }
+    }
+
+    private void bindProfile() {
+        boolean signedIn = sessionManager.isLoggedIn() && !sessionManager.isGuest() && sessionManager.getUserId() > 0;
+        User user = signedIn ? databaseHelper.getUserById(sessionManager.getUserId()) : null;
+
+        if (signedIn && user != null) {
+            profileName.setText(user.getFullName());
+            profileEmail.setText(user.getEmail());
+            profileStatus.setText("SIGNED IN");
+        } else if (sessionManager.isGuest()) {
+            profileName.setText("Guest traveler");
+            profileEmail.setText("Sign in to save favorites and reservations");
+            profileStatus.setText("GUEST MODE");
+        } else {
+            profileName.setText("Traveler");
+            profileEmail.setText("Sign in to personalize your journey");
+            profileStatus.setText("NOT SIGNED IN");
+        }
+
+        findViewById(R.id.buttonEditProfile).setVisibility(signedIn ? View.VISIBLE : View.GONE);
+        findViewById(R.id.buttonLogout).setVisibility(signedIn ? View.VISIBLE : View.GONE);
+        findViewById(R.id.buttonSignIn).setVisibility(signedIn ? View.GONE : View.VISIBLE);
+    }
+
+    private void showEditProfileDialog() {
+        if (!sessionManager.isLoggedIn() || sessionManager.isGuest()) {
+            Toast.makeText(this, "Sign in to edit your profile.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        User user = databaseHelper.getUserById(sessionManager.getUserId());
+        if (user == null) {
+            Toast.makeText(this, "Profile not found.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        LinearLayout form = new LinearLayout(this);
+        form.setOrientation(LinearLayout.VERTICAL);
+        form.setPadding(32, 12, 32, 0);
+
+        EditText nameInput = new EditText(this);
+        nameInput.setHint("Full name");
+        nameInput.setSingleLine(true);
+        nameInput.setText(user.getFullName());
+        form.addView(nameInput);
+
+        EditText phoneInput = new EditText(this);
+        phoneInput.setHint("Phone");
+        phoneInput.setSingleLine(true);
+        phoneInput.setText(user.getPhone());
+        form.addView(phoneInput);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Edit Profile")
+                .setView(form)
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Save", (dialog, which) -> {
+                    String name = nameInput.getText().toString().trim();
+                    String phone = phoneInput.getText().toString().trim();
+                    if (name.isEmpty()) {
+                        Toast.makeText(this, "Name cannot be empty.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (databaseHelper.updateUserProfile(user.getId(), name, phone)) {
+                        sessionManager.saveUserName(name);
+                        bindProfile();
+                        Toast.makeText(this, "Profile updated.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Could not update profile.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
     }
 }

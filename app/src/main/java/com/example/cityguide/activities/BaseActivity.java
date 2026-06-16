@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cityguide.R;
@@ -84,7 +85,7 @@ public class BaseActivity extends AppCompatActivity {
         View page = content.getChildAt(0);
         page.setPadding(
                 page.getPaddingLeft(),
-                page.getPaddingTop() + dp(22),
+                page.getPaddingTop() + dp(getPageTopInsetDp()),
                 page.getPaddingRight(),
                 page.getPaddingBottom() + dp(NAV_HEIGHT_DP)
         );
@@ -146,15 +147,50 @@ public class BaseActivity extends AppCompatActivity {
         item.setOnClickListener(v -> {
             if (!active) {
                 Intent intent = new Intent(this, activityClass);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
         return item;
     }
 
+    @Override
+    public void onBackPressed() {
+        if (this instanceof HomeActivity) {
+            showExitConfirmation();
+            return;
+        }
+        if (isTopLevelDestination()) {
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    private boolean isTopLevelDestination() {
+        return this instanceof MapActivity
+                || this instanceof GuidesActivity
+                || this instanceof FavoritesActivity
+                || this instanceof SettingsActivity;
+    }
+
+    private void showExitConfirmation() {
+        new AlertDialog.Builder(this)
+                .setTitle("Exit CityGuide+?")
+                .setMessage("Are you sure you want to close the app?")
+                .setNegativeButton("Stay", null)
+                .setPositiveButton("Exit", (dialog, which) -> finishAffinity())
+                .show();
+    }
+
     private int dp(int value) {
         return Math.round(value * getResources().getDisplayMetrics().density);
+    }
+
+    protected int getPageTopInsetDp() {
+        return 22;
     }
 
     private void clearButtonTints(View view) {

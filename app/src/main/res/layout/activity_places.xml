@@ -3,60 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cream"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:orientation="vertical"
     android:padding="18dp">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Explore Places"
-        android:textColor="@color/deep_navy_blue"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <View
-        android:layout_width="116dp"
-        android:layout_height="3dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/gold_line" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/card_background"
-        android:orientation="vertical"
-        android:padding="14dp">
-
-        <Spinner
-            android:id="@+id/spinnerCity"
-            android:layout_width="match_parent"
-            android:layout_height="48dp" />
-
-        <Spinner
-            android:id="@+id/spinnerCategory"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp" />
-
-        <Button
-            android:id="@+id/buttonApplyFilters"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/btn_secondary"
-            android:text="Apply Filters"
-            android:textAllCaps="false"
-            android:textColor="@color/deep_navy_blue"
-            android:textStyle="bold" />
-    </LinearLayout>
 
     <ListView
         android:id="@+id/listPlaces"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:divider="@android:color/transparent"
-        android:dividerHeight="12dp" />
+        android:dividerHeight="4dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="14dp" />
 </LinearLayout>

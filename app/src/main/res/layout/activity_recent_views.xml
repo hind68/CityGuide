@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <LinearLayout
+        android:id="@+id/emptyState"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="28dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:contentDescription="Recently viewed"
+            android:src="@drawable/ic_place" />
+
+        <TextView
+            android:id="@+id/textEmptyState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            android:textColor="@color/deep_navy_blue"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recently Viewed"
+            android:textColor="@color/deep_navy_blue"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/listRecentViews"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="4dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="14dp" />
+    </LinearLayout>
+</FrameLayout>
