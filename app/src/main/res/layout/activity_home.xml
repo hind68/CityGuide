@@ -171,6 +171,95 @@
             </HorizontalScrollView>
 
             <TextView
+                android:id="@+id/textRemoteSuggestionsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/remote_suggestions"
+                android:textColor="@color/deep_navy_blue"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="138dp"
+                android:layout_marginTop="14dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingBottom="12dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/remoteSuggestionsContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/remoteSuggestionOne"
+                        style="@style/HomeGuideCardStyle"
+                        android:layout_width="190dp"
+                        android:layout_marginRight="14dp"
+                        android:gravity="center_vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/textRemoteTitleOne"
+                            style="@style/HomeSmallTitleStyle"
+                            android:layout_width="match_parent"
+                            android:text="@string/remote_loading" />
+
+                        <TextView
+                            android:id="@+id/textRemoteSubtitleOne"
+                            style="@style/HomeSmallSubtitleStyle"
+                            android:layout_width="match_parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/remoteSuggestionTwo"
+                        style="@style/HomeGuideCardStyle"
+                        android:layout_width="190dp"
+                        android:layout_marginRight="14dp"
+                        android:gravity="center_vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/textRemoteTitleTwo"
+                            style="@style/HomeSmallTitleStyle"
+                            android:layout_width="match_parent"
+                            android:text="@string/remote_loading" />
+
+                        <TextView
+                            android:id="@+id/textRemoteSubtitleTwo"
+                            style="@style/HomeSmallSubtitleStyle"
+                            android:layout_width="match_parent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/remoteSuggestionThree"
+                        style="@style/HomeGuideCardStyle"
+                        android:layout_width="190dp"
+                        android:gravity="center_vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/textRemoteTitleThree"
+                            style="@style/HomeSmallTitleStyle"
+                            android:layout_width="match_parent"
+                            android:text="@string/remote_loading" />
+
+                        <TextView
+                            android:id="@+id/textRemoteSubtitleThree"
+                            style="@style/HomeSmallSubtitleStyle"
+                            android:layout_width="match_parent" />
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"

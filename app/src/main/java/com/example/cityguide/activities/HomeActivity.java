@@ -11,9 +11,17 @@ import com.example.cityguide.database.DatabaseHelper;
 import com.example.cityguide.models.Guide;
 import com.example.cityguide.models.Place;
 import com.example.cityguide.models.RecentView;
+import com.example.cityguide.network.RemotePlaceDto;
+import com.example.cityguide.network.TourismBackendRepository;
 import com.example.cityguide.utils.Constants;
 import com.example.cityguide.utils.ImageLoader;
 import com.example.cityguide.utils.SessionManager;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends BaseActivity {
     private DatabaseHelper databaseHelper;
@@ -61,6 +69,7 @@ public class HomeActivity extends BaseActivity {
         findViewById(R.id.recentPlace).setOnClickListener(v -> openLatestRecentView());
         findViewById(R.id.buttonExploreMap).setOnClickListener(v -> open(MapActivity.class));
         bindLatestRecentView();
+        loadRemoteSuggestions();
     }
 
     @Override
@@ -131,6 +140,64 @@ public class HomeActivity extends BaseActivity {
         }
         Intent intent = new Intent(this, GuideDetailsActivity.class);
         intent.putExtra(Constants.EXTRA_GUIDE_ID, guideId);
+        startActivity(intent);
+    }
+
+    private void loadRemoteSuggestions() {
+        new TourismBackendRepository().getService().getSuggestions().enqueue(new Callback<List<RemotePlaceDto>>() {
+            @Override
+            public void onResponse(Call<List<RemotePlaceDto>> call, Response<List<RemotePlaceDto>> response) {
+                if (!response.isSuccessful() || response.body() == null || response.body().isEmpty()) {
+                    showRemoteSuggestionsUnavailable();
+                    return;
+                }
+                bindRemoteSuggestions(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<RemotePlaceDto>> call, Throwable t) {
+                showRemoteSuggestionsUnavailable();
+            }
+        });
+    }
+
+    private void bindRemoteSuggestions(List<RemotePlaceDto> suggestions) {
+        int[] cardIds = {R.id.remoteSuggestionOne, R.id.remoteSuggestionTwo, R.id.remoteSuggestionThree};
+        int[] titleIds = {R.id.textRemoteTitleOne, R.id.textRemoteTitleTwo, R.id.textRemoteTitleThree};
+        int[] subtitleIds = {R.id.textRemoteSubtitleOne, R.id.textRemoteSubtitleTwo, R.id.textRemoteSubtitleThree};
+
+        for (int i = 0; i < cardIds.length; i++) {
+            if (i >= suggestions.size()) {
+                findViewById(cardIds[i]).setVisibility(android.view.View.GONE);
+                continue;
+            }
+            RemotePlaceDto suggestion = suggestions.get(i);
+            ((TextView) findViewById(titleIds[i])).setText(suggestion.name);
+            ((TextView) findViewById(subtitleIds[i])).setText(
+                    getString(R.string.remote_suggestion_subtitle, suggestion.city, suggestion.category));
+            findViewById(cardIds[i]).setOnClickListener(v -> openRemoteSuggestion(suggestion));
+        }
+    }
+
+    private void showRemoteSuggestionsUnavailable() {
+        ((TextView) findViewById(R.id.textRemoteTitleOne)).setText(R.string.remote_unavailable);
+        ((TextView) findViewById(R.id.textRemoteSubtitleOne)).setText("");
+        findViewById(R.id.remoteSuggestionTwo).setVisibility(android.view.View.GONE);
+        findViewById(R.id.remoteSuggestionThree).setVisibility(android.view.View.GONE);
+    }
+
+    private void openRemoteSuggestion(RemotePlaceDto suggestion) {
+        int placeId = findPlaceId(databaseHelper, suggestion.name);
+        if (placeId != -1) {
+            Intent intent = new Intent(this, PlaceDetailsActivity.class);
+            intent.putExtra(Constants.EXTRA_PLACE_ID, placeId);
+            startActivity(intent);
+            return;
+        }
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra(Constants.EXTRA_LATITUDE, suggestion.latitude);
+        intent.putExtra(Constants.EXTRA_LONGITUDE, suggestion.longitude);
+        intent.putExtra(Constants.EXTRA_LABEL, suggestion.name);
         startActivity(intent);
     }
 

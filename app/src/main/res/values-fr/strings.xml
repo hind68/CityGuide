@@ -179,4 +179,8 @@
     <string name="duration_price_rating_label">%1$s - %2$s MAD - Note %3$s</string>
     <string name="hours_price_label">%1$s heures - %2$s MAD</string>
     <string name="date_at_time">%1$s à %2$s</string>
+    <string name="remote_suggestions">Suggestions distantes</string>
+    <string name="remote_loading">Chargement des suggestions...</string>
+    <string name="remote_unavailable">Les suggestions distantes sont indisponibles.</string>
+    <string name="remote_suggestion_subtitle">%1$s - %2$s</string>
 </resources>
